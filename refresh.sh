@@ -1,8 +1,8 @@
 #!/bin/bash
-cd /src/jans
+cd "${0%/*}"
+pwd
 git pull
-find -type d -exec chmod -R a+rx {} \;
-find -type d -exec chmod -R u+rwx {} \;
-find -type f -exec chmod -R a+r {} \;
-find -type f -exec chmod -R u+rw {} \;
+find -type d -exec chmod -R 755 {} \;
+find -type f -exec chmod -R 644 {} \;
 chown -R root:www-data php/www
+chmod 755 refresh.sh
