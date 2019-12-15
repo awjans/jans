@@ -12,40 +12,13 @@ sudo ufw allow 'WWW Full'
 sudo ufw allow 'OpenSSH'
 sudo mkdir /src
 sudo git clone https://github.com/awjans/jans.git /src/jans
+sudo chmod a+x /src/jans/refresh.sh
+sudo /src/jans/refresh.sh
 sudo ln -s /src/jans/php/www/public /var/www/jans
 cat | sudo tee /etc/hosts <<EOF
 127.0.1.1  jans.org   www.jans.org andrew.jans.org
 EOF
 sudo a2enmod ssl
-cat | sudo tee /etc/apache2/sites-available/jans.org.conf <<EOF
-<VirtualHost *:80>
-ServerName jans.org
-ServerAlias   www.jans.org
-ServerAdmin webmaster@jans.org
-DocumentRoot /var/www/jans
-<Directory "/var/www/jans">
-Order allow,deny
-AllowOverride All
-Allow from all
-Require all granted
-</Directory>
-ErrorLog \${APACHE_LOG_DIR}/jans.org.error.log
-#CustomLog \${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
-<VirtualHost *:80>
-ServerName andrew.jans.org
-ServerAdmin webmaster@jans.org
-DocumentRoot /var/www/jans/andrew
-<Directory "/var/www/jans/andrew">
-Order allow,deny
-AllowOverride All
-Allow from all
-Require all granted
-</Directory>
-ErrorLog \${APACHE_LOG_DIR}/jans.org.error.log
-#CustomLog \${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
-EOF
 sudo a2ensite jans.org
 sudo certbot run -n --apache --agree-tos --email webmaster@jans.org --domains jans.org,www.jans.org,andrew.jans.org
 sudo systemctl restart apache2
