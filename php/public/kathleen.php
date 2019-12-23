@@ -20,7 +20,7 @@
             <p>Greetings and salutations from our family to yours.</p>
         </div>
         <footer>
-            <p>Copyright &copy; 2020 <a href="//andrew.jans.org/">Andrew Jans</a> - All Rights Reserved</p>
+            <p>Copyright &copy; <?=date("Y")?> <a href="//andrew.jans.org/">Andrew Jans</a> - All Rights Reserved</p>
         </footer>
     </body>
 </html>

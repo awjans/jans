@@ -10,5 +10,8 @@
             <p>It's not what I know, it's what I can learn.</p>
             <figcaption>&mdash;personal motto</figcaption>
         </figure>
+        <footer>
+            <p>Copyright &copy; <?=date("Y")?> <a href="//andrew.jans.org/">Andrew Jans</a> - All Rights Reserved</p>
+        </footer>
     </body>
 </html>
